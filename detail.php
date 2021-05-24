@@ -186,7 +186,8 @@
     $item->id = "1234";
     $item->title = $_POST['title'];
     $item->description = "Celular de Tienda e-commerce";
-    $item->picture_url =  "https://mariosam-mp-commerce-php.herokuapp.com/".$_POST['img']; // "//{$_SERVER['HTTP_HOST']}{$_POST['img']}";
+    $item->picture_url = "https://mariosam-mp-commerce-php.herokuapp.com/{$_POST['img']}"; 
+    // $item->picture_url = "//{$_SERVER['HTTP_HOST']}{$_POST['img']}";
     $item->category_id = "celular";
     $item->quantity = $_POST['unit'];
     $item->unit_price = $_POST['price'];
@@ -196,10 +197,17 @@
     // 
     $preference->notification_url = 'https://webhook.site/0a0b2e09-3c02-4324-b104-63c15b9aa1c2';
     $preference->back_urls = array(
-        "success" => "https://mariosam-mp-commerce-php.herokuapp.com/success.php", // "//{$_SERVER['HTTP_HOST']}/success.php",
-        "failure" => "https://mariosam-mp-commerce-php.herokuapp.com/failure.php", // "//{$_SERVER['HTTP_HOST']}/failure.php",
-        "pending" => "https://mariosam-mp-commerce-php.herokuapp.com/pending.php" // "//{$_SERVER['HTTP_HOST']}/pending.php"
+        "success" => "https://mariosam-mp-commerce-php.herokuapp.com/success.php",
+        "failure" => "https://mariosam-mp-commerce-php.herokuapp.com/failure.php",
+        "pending" => "https://mariosam-mp-commerce-php.herokuapp.com/pending.php"
     );
+    /* 
+    $preference->back_urls = array(
+        "success" => "//{$_SERVER['HTTP_HOST']}/success.php",
+        "failure" => "//{$_SERVER['HTTP_HOST']}/failure.php",
+        "pending" => "//{$_SERVER['HTTP_HOST']}/pending.php"
+    );
+    */
     $preference->auto_return = "approved";
 
     // 
