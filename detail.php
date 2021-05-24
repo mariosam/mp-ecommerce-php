@@ -196,9 +196,9 @@
     // 
     $preference->notification_url = 'https://webhook.site/0a0b2e09-3c02-4324-b104-63c15b9aa1c2';
     $preference->back_urls = array(
-        "success" => "https://mariosam-mp-commerce-php.herokuapp.com/success.php"; // "//{$_SERVER['HTTP_HOST']}/success.php",
-        "failure" => "https://mariosam-mp-commerce-php.herokuapp.com/failure.php"; // "//{$_SERVER['HTTP_HOST']}/failure.php",
-        "pending" => "https://mariosam-mp-commerce-php.herokuapp.com/pending.php"; // "//{$_SERVER['HTTP_HOST']}/pending.php"
+        "success" => "https://mariosam-mp-commerce-php.herokuapp.com/success.php", // "//{$_SERVER['HTTP_HOST']}/success.php",
+        "failure" => "https://mariosam-mp-commerce-php.herokuapp.com/failure.php", // "//{$_SERVER['HTTP_HOST']}/failure.php",
+        "pending" => "https://mariosam-mp-commerce-php.herokuapp.com/pending.php" // "//{$_SERVER['HTTP_HOST']}/pending.php"
     );
     $preference->auto_return = "approved";
 
