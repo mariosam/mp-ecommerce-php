@@ -157,6 +157,10 @@
     $payer->surname = "Landa";
     $payer->email = "test_user_92801501@testuser.com";
     $payer->date_created = new DateTime(); // "2021-05-23T12:58:41.425-04:00"; 
+    $payer->identification = array(
+	    "type" => "CPF",
+	    "number" => "19119119100"
+  	);
     $payer->phone = array(
         "area_code" => "55",
         "number" => "985 298 743"
