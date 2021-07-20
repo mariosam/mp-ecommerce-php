@@ -138,7 +138,8 @@
 
     // Cria um objeto de preferência
     $preference = new MercadoPago\Preference();
-    $preference->external_reference = 'mario.hermes@gmail.com';
+    $preference->external_reference = 'eu@mariosam.com.br';
+    $preference->total_amount = $_POST['price'];
 
     // remove cartao amex e limita parcelas
     $preference->payment_methods = array(
@@ -162,8 +163,8 @@
 	    "number" => "19119119100"
   	);
     $payer->phone = array(
-        "area_code" => "55",
-        "number" => "985 298 743"
+        "area_code" => 55,
+        "number" => 985298743
     );
     $payer->address = array(
         "street_name" => "Insurgentes Sur",
@@ -190,29 +191,29 @@
     $item->id = "1234";
     $item->title = $_POST['title'];
     $item->description = "Celular de Tienda e-commerce";
-    // $item->picture_url = "https://mariosam-mp-commerce-php.herokuapp.com/{$_POST['img']}"; 
-    $item->picture_url = "//{$_SERVER['HTTP_HOST']}{$_POST['img']}";
+    $item->picture_url = "http://{$_SERVER['HTTP_HOST']}/mp-ecommerce-php".substr($_POST['img'],1);
     $item->category_id = "celular";
     $item->quantity = $_POST['unit'];
     $item->unit_price = $_POST['price'];
     $item->currency_id = "BRL";
+    $item->total_amount = $_POST['price']; // multiplica preco por quantidade
     $preference->items = array($item);
-
     // 
-    $preference->notification_url = 'https://webhook.site/0a0b2e09-3c02-4324-b104-63c15b9aa1c2';
-    /* 
+    // $preference->notification_url = 'https://webhook.site/0a0b2e09-3c02-4324-b104-63c15b9aa1c2';
+    // $preference->notification_url = 'https://webhook.site/#!/0a0b2e09-3c02-4324-b104-63c15b9aa1c2/fb29bd9b-349b-4240-bf15-d0f82d79fa39/1';
+
+    $preference->notification_url = 'https://webhook.site/0dd08281-a933-431a-87ef-c6ec6251ff0d';
+    // https://webhook.site/#!/0dd08281-a933-431a-87ef-c6ec6251ff0d
+
     $preference->back_urls = array(
-        "success" => "https://mariosam-mp-commerce-php.herokuapp.com/success.php",
-        "failure" => "https://mariosam-mp-commerce-php.herokuapp.com/failure.php",
-        "pending" => "https://mariosam-mp-commerce-php.herokuapp.com/pending.php"
-    );
-    */
-    $preference->back_urls = array(
-        "success" => "//{$_SERVER['HTTP_HOST']}/success.php",
-        "failure" => "//{$_SERVER['HTTP_HOST']}/failure.php",
-        "pending" => "//{$_SERVER['HTTP_HOST']}/pending.php"
+        "success" => "{$_SERVER['HTTP_HOST']}/mp-ecommerce-php/success.php",
+        "failure" => "{$_SERVER['HTTP_HOST']}/mp-ecommerce-php/failure.php",
+        "pending" => "{$_SERVER['HTTP_HOST']}/mp-ecommerce-php/pending.php"
     );
     $preference->auto_return = "approved";
+
+    // preco final deve somar items + quantidade + frete e verificar cupons
+    // $preference->transaction_amount = $_POST['price'];
 
     // 
     $preference->save();
@@ -224,7 +225,7 @@ const mp = new MercadoPago('APP_USR-6096a634-0b35-452c-94c9-a18adb8ffb15', {loca
 
 mp.checkout({
     preference: {
-        id: '<?php echo $preference->id; ?>'
+        id: '<?php echo $preference->id; ?>' //725736327-787cc161-7f0d-44c6-ad98-c71409b997c0
     },
     render: {
         container: '.cho-container',
